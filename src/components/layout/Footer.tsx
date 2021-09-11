@@ -4,6 +4,7 @@ import React from 'react';
 
 function Footer() {
   return (
+  <footer> 
       <div className="container">
         <div className="row">
             <nav className="col-12 navbar navbar-light bg-light">
@@ -15,6 +16,7 @@ function Footer() {
             </nav>
         </div>
       </div>
+  </footer> 
   );
 }
 

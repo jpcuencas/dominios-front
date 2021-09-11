@@ -35,7 +35,13 @@ const Navbar = () => {
           
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-
+            <Link className="nav-link" to="/servers">Servers</Link>
+            
+            <Link className="nav-link" to="/domains">Domains</Link>
+            
+            <Link className="nav-link" to="/templates">Templates</Link>
+            
+            <Link className="nav-link" to="/types">Types</Link>
 
                 
             </div>

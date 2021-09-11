@@ -9,16 +9,14 @@ const logger = createLogger({
     transports: [
         new transports.Console({
             level: 'debug',
-
-        })
-    ]
-});
-/**
-// is not working
+        }),
         new transports.File({
+            level: 'debug',
             maxsize: 5120000,
             maxFiles: 5,
             filename: `${__dirname}/../logs/log-app.log`,
         }), 
- */
+    ]
+});
+// cambiar si se prefiere usar la consola del navegador
 export default logger//console;

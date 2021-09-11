@@ -1,12 +1,16 @@
 import React from 'react';
 
 
+interface Props {
+    title:any
+}
 
-function Header() {
+const Header = (props:any)=> { 
   return (
-    <>
-    
-    </>
+    <header>
+
+
+    </header>
   );
 }
 
