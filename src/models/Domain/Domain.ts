@@ -6,7 +6,6 @@ export default interface Domain {
     name: string;
     idServer: number;
     idType: number;
-    ip: string;
     idLenguage: string;
     state: State;
     version?: string;

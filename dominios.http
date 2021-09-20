@@ -1,17 +1,142 @@
 // request with rest client vscode extension
-@urlBase = http://localhost:8081
+@urlBase = http://localhost:8081/dominios-rest-back/public
+@contentType = application/json
 
 ### DOMAINS ###
 GET {{urlBase}}/domains?page=1&offset=10
+##Authorization: token xxx
 
+PUT {{urlBase}}/domains/1 HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "idServer": 1
+    "idType": 1
+    "idLenguage": "1"
+    "state": "Pending"
+    "version": "1.1"
+}
+
+POST {{urlBase}}/domains HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "idServer": 1
+    "idType": 1
+    "idLenguage": "1"
+    "state": "Pending"
+    "version": "1.1"
+}
+
+DELETE {{urlBase}}/domains/1
+##Authorization: token xxx
 
 ### TYPES ###
 GET {{urlBase}}/types?page=1&offset=10
+##Authorization: token xxx
 
+PUT {{urlBase}}/types/1 HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "format": "title titulo, h1 test";
+    "description": "pagina ejemplo";
+}
+
+POST {{urlBase}}/types HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "format": "title titulo, h1 test";
+    "description": "pagina ejemplo";
+}
+
+DELETE {{urlBase}}/types/1
+##Authorization: token xxx
 
 ### TEMPLATES ###
 GET {{urlBase}}/templates?page=1&offset=10
+##Authorization: token xxx
+
+PUT {{urlBase}}/templates/1 HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "idType": 1;
+    "description": "plantilla ejemplo";
+}
+
+POST {{urlBase}}/templates HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "idType": 1;
+    "description": "plantilla ejemplo";
+}
+
+DELETE {{urlBase}}/templates/1
+##Authorization: token xxx
 
 ### SERVERS ###
 GET {{urlBase}}/servers?page=1&offset=10
+##Authorization: token xxx
+
+PUT {{urlBase}}/servers/1 HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "provider": ""
+    "ip": "127.0.0.1"
+    "webUser": "user1"
+    "webPass": "pass1"
+    "ftpUser": "user1"
+    "ftpPass": "pass1"
+}
+
+POST {{urlBase}}/servers HTTP/1.1
+##Authorization: token xxx
+content-type: application/json
+
+{
+    "lastChanged": "Wed, 21 Oct 2015 18:27:50 GMT";
+    "id": 1
+    "name": "test"
+    "provider": ""
+    "ip": "127.0.0.1"
+    "webUser": "user1"
+    "webPass": "pass1"
+    "ftpUser": "user1"
+    "ftpPass": "pass1"
+}
+
+DELETE {{urlBase}}/servers/1
+##Authorization: token xxx
 
