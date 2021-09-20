@@ -1,0 +1,17 @@
+// request with rest client vscode extension
+@urlBase = http://localhost:8081
+
+### DOMAINS ###
+GET {{urlBase}}/domains?page=1&offset=10
+
+
+### TYPES ###
+GET {{urlBase}}/types?page=1&offset=10
+
+
+### TEMPLATES ###
+GET {{urlBase}}/templates?page=1&offset=10
+
+### SERVERS ###
+GET {{urlBase}}/servers?page=1&offset=10
+
