@@ -5,6 +5,8 @@ import config from '../../config/dot-env';
 
 
 const Navbar = () => {
+
+    console.info(config);
     
     //const history = useHistory();
     //const initialLoggin: Boolean =false;
@@ -26,30 +28,20 @@ const Navbar = () => {
     }, []);
     //     <Link className="nav-link" to="/list">Assets</Link>
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-        
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon" />
-          </button>
-          
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-            <Link className="nav-link" to="/servers">Servers</Link>
-            
-            <Link className="nav-link" to="/domains">Domains</Link>
-            
-            <Link className="nav-link" to="/templates">Templates</Link>
-            
-            <Link className="nav-link" to="/types">Types</Link>
-
-                
-            </div>
-          </div>
-
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
+                <div className="navbar-nav">
+                    <Link className="nav-link" to="/servers">Servers</Link>
+                    
+                    <Link className="nav-link" to="/domains">Domains</Link>
+                    
+                    <Link className="nav-link" to="/templates">Templates</Link>
+                    
+                    <Link className="nav-link" to="/types">Types</Link>
+                </div>
         </div>
-      </nav>
-    )
+    </nav>
+    );
 }
 
 

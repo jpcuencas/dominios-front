@@ -7,9 +7,10 @@ interface Props {
 
 const Header = (props:any)=> { 
   return (
-    <header>
+    <header className="page-header">
+        <div className="page-header-content">
 
-
+        </div>
     </header>
   );
 }

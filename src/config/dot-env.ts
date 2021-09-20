@@ -17,5 +17,6 @@ dotenv.config({ path: path });
 console.log(process.env)
 
 export default{
-    PORT: process.env.PORT || 4001,
+    PORT: process.env.PORT || 5000,
+    serverUrl: process.env.serverUrl || 'http://localhost:8081/dominios-rest-back/public',
 };
