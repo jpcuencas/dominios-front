@@ -6,6 +6,9 @@
 GET {{urlBase}}/domains?page=1&offset=10
 ##Authorization: token xxx
 
+GET {{urlBase}}/domains/1
+##Authorization: token xxx
+
 PUT {{urlBase}}/domains/1 HTTP/1.1
 ##Authorization: token xxx
 content-type: application/json
@@ -43,6 +46,9 @@ DELETE {{urlBase}}/domains/1
 GET {{urlBase}}/types?page=1&offset=10
 ##Authorization: token xxx
 
+GET {{urlBase}}/types/1
+##Authorization: token xxx
+
 PUT {{urlBase}}/types/1 HTTP/1.1
 ##Authorization: token xxx
 content-type: application/json
@@ -74,6 +80,9 @@ DELETE {{urlBase}}/types/1
 GET {{urlBase}}/templates?page=1&offset=10
 ##Authorization: token xxx
 
+GET {{urlBase}}/templates/1
+##Authorization: token xxx
+
 PUT {{urlBase}}/templates/1 HTTP/1.1
 ##Authorization: token xxx
 content-type: application/json
@@ -103,6 +112,9 @@ DELETE {{urlBase}}/templates/1
 
 ### SERVERS ###
 GET {{urlBase}}/servers?page=1&offset=10
+##Authorization: token xxx
+
+GET {{urlBase}}/servers/1
 ##Authorization: token xxx
 
 PUT {{urlBase}}/servers/1 HTTP/1.1
