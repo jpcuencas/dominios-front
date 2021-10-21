@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+
+import DataTable from 'react-data-table-component';
 import console from '../config/logger';
 
 interface Props {
@@ -8,41 +10,16 @@ const Domains = (props:any)=> {
 //    const [isLoading, setLoading] = useState(false);
 
 /**/
-    useEffect( () => {        
-        //if(!props.match.params.id){
-        //    props.history.push("/list");
-        //}
-        
-    }, []);
-   
-    return (
-    <>
-        <table className="table">
-          <caption>Statement Summary</caption>
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Server</th>
-              <th scope="col">Type</th>
-              <th scope="col">State</th>
-              <th scope="col">#</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="ID"><a href='dominios.php?mode=edit'>1</a></td>
-              <td data-label="Name"><a href='dominios.php?mode=edit'>example.es</a></td>
-              <td data-label="Server"><a href='dominios.php?mode=edit'>www.example.es</a></td>
-              <td data-label="Type"><a href='dominios.php?mode=edit'>example.page</a></td>
-              <td data-label="State"><a href='dominios.php?mode=edit'>Pending</a></td>
-              <td data-label="Menu">
-                <span className="dropdown show">
-                  <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Actions
-                  </a>
+    
+    const [selectedRows, setSelectedRows] = useState([]);
 
-                  <span className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    useEffect(() => {
+        
+        console.info('state', selectedRows);
+    }, [selectedRows]);
+
+/**
+ * <span className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a className="dropdown-item" href="#">Instalar</a>
                     <a className="dropdown-item" href="#">ActualizarFicheros</a>
                     <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar limpiar del dominio en servidor\"))return false'>LimpiarCarpeta</a>
@@ -53,16 +30,198 @@ const Domains = (props:any)=> {
                     <a className="dropdown-item" href="#" target='_blank'>EditarWP</a>
                     <a className="dropdown-item" href="#" target='_blank'>Visitar</a>
                   </span>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div>
+ */
+
+    const instalar = () => {
+        console.info('clicked');
+    };
+    const actualizarFicheros = () => {
+        console.info('clicked');
+    };
+    const limpiarCarpeta = () => {
+        if(window.confirm("Pulsa Aceptar para confirmar limpiar del dominio en servidor")) {
+
+        }
+        console.info('clicked');
+    };
+    const eliminarConfiguracion = () => {
+        if(window.confirm("Pulsa Aceptar para confirmar el borrado del dominio en servidor")) {
+
+        }
+        console.info('clicked');
+    };
+    const borrar = () => {
+        if(window.confirm("Pulsa Aceptar para confirmar el borrado del dominio")) {
+
+        }
+        console.info('clicked');
+    };
+    const bloquear = () => {
+        if(window.confirm("Pulsa Aceptar para confirmar bloquear del dominio en servidor")) {
+
+        }
+        console.info('clicked');
+    };
+    const desbloquear = () => {
+        if(window.confirm("Pulsa Aceptar para confirmar limpiar del dominio en servidor")) {
+
+        }
+        console.info('clicked');
+    };
+
+    const handleChange = useCallback(state => {
+        setSelectedRows(state.selectedRows);
+    }, []);
+//<button onClick={handleButtonClick}>Action</button>,
+    const columns = useMemo(
+        () => [
+            {
+                name: 'Id',
+                selector: 'id',
+                sortable: true,
+                grow: 2,
+            },
+            {
+                name: 'Name',
+                cell: (row: any) =>
+                <a href='servidor.php?mode=edit'>row.name</a>,
+                sortable: true,
+            },
+            {
+                name: 'IP',
+                selector:'ip',
+                sortable: true,
+                right: true,
+            },
+            {
+                name: 'Server',
+                selector: 'server.name',
+                sortable: true,
+                right: true,
+            },
+            {
+                name: 'Type',
+                selector: 'type.name',
+                sortable: true,
+                right: true,
+            },
+            {
+                name: 'Language',
+                selector: 'language.name',
+                sortable: true,
+                right: true,
+            },
+            {
+                name: 'Template',
+                selector: 'template.name',
+                sortable: true,
+                right: true,
+            },
+            {
+                name: 'State',
+                selector: 'state',
+                sortable: true,
+                right: true,
+            },
+            {
+                name:'Options',
+                cell: (row: any) => 
+                <span className="dropdown show">
+                    <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Actions
+                    </a>
+
+                    <span className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a className="dropdown-item" href="#" onClick={instalar}>Instalar</a>
+                      <a className="dropdown-item" href="#" onClick={actualizarFicheros}>ActualizarFicheros</a>
+                      <a className="dropdown-item" href="#" onClick={limpiarCarpeta}>LimpiarCarpeta</a>
+                      <a className="dropdown-item" href="#" onClick={eliminarConfiguracion}>EliminarConfiguracion</a>
+                      <a className="dropdown-item" href="#" onClick={borrar}>Borrar</a>
+                      <a className="dropdown-item" href="#" onClick={bloquear}>Bloquear</a>
+                      { row.state ==='bloqueado' && <a className="dropdown-item" href="#" onClick={desbloquear}>Desbloquear</a>}
+                      
+                      <a className="dropdown-item" href="{row.name}" target='_blank'>EditarWP</a>
+                      <a className="dropdown-item" href="#" target='_blank'>Visitar</a>
+                    </span>
+                  </span>,
+                ignoreRowClick: true,
+                allowOverflow: true,
+                button: true,
+            },
+        ],
+        [],
+    );
+    const tableDataItems = [
+        {
+            id: 1,
+            name: 'bonosdescuento.com',
+            ip: '23.89.199.222',
+            server:{
+                name: 'www.fiveblogs1.com'
+            },
+            type: {
+                name: 'Blog'
+            },
+            language: {
+                name: 'Español'
+            },
+            template: {
+                name: 'wordpress_basico_es'
+            },
+            state: 'Instalado'
+        },{
+            id: 2,
+            name: 'bonosdescuento.com',
+            ip: '23.89.199.222',
+            server:{
+                name: 'www.fiveblogs1.com'
+            },
+            type: {
+                name: 'Blog'
+            },
+            language: {
+                name: 'Español'
+            },
+            template: {
+                name: 'wordpress_basico_es'
+            },
+            state: 'Instalado'
+        },{
+            id: 3,
+            name: 'bonosdescuento.com',
+            ip: '23.89.199.222',
+            server:{
+                name: 'www.fiveblogs1.com'
+            },
+            type: {
+                name: 'Blog'
+            },
+            language: {
+                name: 'Español'
+            },
+            template: {
+                name: 'wordpress_basico_es'
+            },
+            state: 'Instalado'
+        },
+    ];
+
+
+    return (
+    <>
+        <DataTable
+            title="Domains"
+            data={tableDataItems}
+            columns={columns}
+            selectableRows
+            onSelectedRowsChange={handleChange}
+        />
+         <div>
             <p><a href='dominios.php?mode=new'>Crear nuevo dominio</a></p>
         </div>
     </>
     );
+    
 }
 
 export default Domains;

@@ -3,6 +3,8 @@
 @contentType = application/json
 
 ### DOMAINS ###
+GET {{urlBase}}/domains
+##Authorization: token xxx
 GET {{urlBase}}/domains?page=1&offset=10
 ##Authorization: token xxx
 
@@ -43,6 +45,8 @@ DELETE {{urlBase}}/domains/1
 ##Authorization: token xxx
 
 ### TYPES ###
+GET {{urlBase}}/types
+##Authorization: token xxx
 GET {{urlBase}}/types?page=1&offset=10
 ##Authorization: token xxx
 
@@ -77,6 +81,8 @@ DELETE {{urlBase}}/types/1
 ##Authorization: token xxx
 
 ### TEMPLATES ###
+GET {{urlBase}}/templates
+##Authorization: token xxx
 GET {{urlBase}}/templates?page=1&offset=10
 ##Authorization: token xxx
 
@@ -111,6 +117,8 @@ DELETE {{urlBase}}/templates/1
 ##Authorization: token xxx
 
 ### SERVERS ###
+GET {{urlBase}}/servers
+##Authorization: token xxx
 GET {{urlBase}}/servers?page=1&offset=10
 ##Authorization: token xxx
 

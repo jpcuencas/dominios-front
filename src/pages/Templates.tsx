@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+
+import DataTable from 'react-data-table-component';
 import console from '../config/logger';
 
 interface Props {
@@ -8,38 +10,81 @@ const Templates = (props:any)=> {
 //    const [isLoading, setLoading] = useState(false);
 
 /**/
-    useEffect( () => {        
-        //if(!props.match.params.id){
-        //    props.history.push("/list");
-        //}
+const [selectedRows, setSelectedRows] = useState([]);
+
+    useEffect(() => {
         
+        console.info('state', selectedRows);
+    }, [selectedRows]);
+    const handleChange = useCallback(state => {
+        setSelectedRows(state.selectedRows);
     }, []);
+   
+    const borrar = () => {
+        if(window.confirm("Pulsa Aceptar para confirmar el borrado del servidor")) {
+
+        }
+        console.info('clicked');
+    };
+
+    const columns = useMemo(
+        () => [
+            {
+                name: 'Id',
+                selector: 'id',
+                sortable: true,
+                grow: 2,
+            },
+            {
+                name: 'Name',
+                cell: (row: any) =>
+                <a href='servidor.php?mode=edit'>row.name</a>,
+                sortable: true,
+            },
+            {
+                name: 'Page Type',
+                selector:'pageType',
+                sortable: true,
+                right: true,
+            },
+            {
+                name: 'Description',
+                selector: 'description',
+                sortable: true,
+                right: true,
+            },
+            {
+                name:'Options',
+                cell: (row: any) => <button type="button" className="btn btn-primary" onClick={borrar}>Primary</button>,
+                ignoreRowClick: true,
+                allowOverflow: true,
+                button: true,
+            },
+        ],
+        [],
+    );
+
+    
+
+    const tableDataItems = [
+        {
+            id: 1,
+            name: 'bonosdescuento.com',
+            pageType: '23.89.199.222',
+            description:'23.89.199.222',
+        },
+    ];
 
     return (
     <>
-    <table className="table">
-         <caption>Statement Summary</caption>
-         <thead>
-           <tr>
-             <th scope="col">ID</th>
-             <th scope="col">Name</th>
-             <th scope="col">Page Type</th>
-             <th scope="col">Description</th>
-             <th scope="col">#</th>
-           </tr>
-         </thead>
-         <tbody>
-           <tr>
-             <td data-label="ID"><a href='plantilla.php?mode=edit'>1</a></td>
-             <td data-label="Name"><a href='plantilla.php?mode=edit'>example.es</a></td>
-             <td data-label="PageType"><a href='plantilla.php?mode=edit'>www.example.es</a></td>
-             <td data-label="Description"><a href='plantilla.php?mode=edit'>example.page</a></td>
-             <td data-label="Menu">
-                   <a className="dropdown-item" href="#">Borrar</a>
-             </td>
-           </tr>
-         </tbody>
-       </table>
+    
+    <DataTable
+        title="Templates"
+        data={tableDataItems}
+        columns={columns}
+        selectableRows
+        onSelectedRowsChange={handleChange}
+    />
        <div>
            <p><a href='plantilla.php?mode=new'>Crear nueva plantilla</a></p>
        </div>  

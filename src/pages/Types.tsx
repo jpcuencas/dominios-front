@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+
+import DataTable from 'react-data-table-component';
 import console from '../config/logger';
 
 interface Props {
@@ -8,38 +10,80 @@ const Types = (props:any)=> {
 //    const [isLoading, setLoading] = useState(false);
 
 /**/
-    useEffect( () => {        
-        //if(!props.match.params.id){
-        //    props.history.push("/list");
-        //}
-        
-    }, []);
+const [selectedRows, setSelectedRows] = useState([]);
+
+useEffect(() => {
+    
+    console.info('state', selectedRows);
+}, [selectedRows]);
+const handleChange = useCallback(state => {
+    setSelectedRows(state.selectedRows);
+}, []);
+
+const borrar = () => {
+    if(window.confirm("Pulsa Aceptar para confirmar el borrado del servidor")) {
+
+    }
+    console.info('clicked');
+};
+
+const columns = useMemo(
+    () => [
+        {
+            name: 'Id',
+            selector: 'id',
+            sortable: true,
+            grow: 2,
+        },
+        {
+            name: 'Name',
+            cell: (row: any) =>
+            <a href='servidor.php?mode=edit'>row.name</a>,
+            sortable: true,
+        },
+        {
+            name: 'Description',
+            selector:'description',
+            sortable: true,
+            right: true,
+        },
+        {
+            name: 'Format',
+            selector: 'format',
+            sortable: true,
+            right: true,
+        },
+        {
+            name:'Options',
+            cell: (row: any) => <button type="button" className="btn btn-primary" onClick={borrar}>Primary</button>,
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+        },
+    ],
+    [],
+);
+
+
+
+const tableDataItems = [
+    {
+        id: 1,
+        name: 'bonosdescuento.com',
+        description: '23.89.199.222',
+        format:'23.89.199.222',
+    },
+];
    
     return (
     <>
-    <table className="table">
-         <caption>Statement Summary</caption>
-         <thead>
-           <tr>
-             <th scope="col">ID</th>
-             <th scope="col">Name</th>
-             <th scope="col">Description</th>
-             <th scope="col">Format</th>
-             <th scope="col">#</th>
-           </tr>
-         </thead>
-         <tbody>
-           <tr>
-             <td data-label="ID"><a href='tipos.php?mode=edit'>1</a></td>
-             <td data-label="Name"><a href='tipos.php?mode=edit'>example.es</a></td>
-             <td data-label="Description"><a href='tipos.php?mode=edit'>www.example.es</a></td>
-             <td data-label="Format"><a href='tipos.php?mode=edit'>example.page</a></td>
-             <td data-label="Menu">
-                   <a className="dropdown-item" href="#">Borrar</a>
-             </td>
-           </tr>
-         </tbody>
-       </table>
+        <DataTable
+            title="Templates"
+            data={tableDataItems}
+            columns={columns}
+            selectableRows
+            onSelectedRowsChange={handleChange}
+        />
        <div>
            <p><a href='tipos.php?mode=new'>Crear nuevo tipo</a></p>
        </div>  
