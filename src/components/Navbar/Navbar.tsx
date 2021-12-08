@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import console from '../../config/logger';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import config from '../../config/dot-env';
 
 
@@ -8,7 +8,6 @@ const Navbar = () => {
 
     console.info(config);
     
-    //const history = useHistory();
     //const initialLoggin: Boolean =false;
     //const [loggin, setLoggin] = useState<Boolean>(initialLoggin);
     
