@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 import DataTable from 'react-data-table-component';
 import console from '../config/logger';
@@ -38,7 +39,7 @@ const [selectedRows, setSelectedRows] = useState([]);
             {
                 name: 'Name',
                 cell: (row: any) =>
-                <a href='servidor.php?mode=edit'>row.name</a>,
+                <Link to="/template/{row.id}">{row.name}</Link>,
                 sortable: true,
             },
             {
@@ -55,7 +56,7 @@ const [selectedRows, setSelectedRows] = useState([]);
             },
             {
                 name:'Options',
-                cell: (row: any) => <button type="button" className="btn btn-primary" onClick={borrar}>Primary</button>,
+                cell: (row: any) => <button type="button" className="btn btn-primary" onClick={borrar}>Borrar</button>,
                 ignoreRowClick: true,
                 allowOverflow: true,
                 button: true,
@@ -86,7 +87,7 @@ const [selectedRows, setSelectedRows] = useState([]);
         onSelectedRowsChange={handleChange}
     />
        <div>
-           <p><a href='plantilla.php?mode=new'>Crear nueva plantilla</a></p>
+            <p><Link to="/template">Crear nueva plantilla</Link></p>
        </div>  
     </>
     );

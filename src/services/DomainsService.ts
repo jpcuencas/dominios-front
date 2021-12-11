@@ -1,58 +1,86 @@
 import axios from 'axios';
 import console from '../config/logger';
 import config from '../config/dot-env';
+import AbstractService from './AbstractService';
 
-let urlResource ='domains';
-export const loadResources = async (page: string, offset: string) => {
-    let res: any;
-    try {
-        res = await axios.get(`${config.serverUrl}/${urlResource}?page=${page}&offset=${offset}`);
-    } catch(error) {
-        console.error(error);
-    }
-    return res?.data;
-};
+class DomainsService extends AbstractService {
 
-export const loadResource = async (id:number) => {
-    let res: any;
-    try {
-        res = await axios.get(`${config.serverUrl}/${urlResource}/${id}`);
-    } catch(error) {
-        console.error(error);
+    public  resource:string ='domains';
+    constructor() {
+        super();
+        this.setUrlResource(this.resource);
     }
-    return res?.data;
-};
 
-export const insertResource = async (body: any) => {
-    let res: any;
-    try {
-        res = await axios.post(`${config.serverUrl}/${urlResource}`, {
-            data: body
-        });
-    } catch(error) {
-        console.error(error);
+    public installDomain = async (id: string) => {
+        let res: any;
+        try {
+            res = await axios.get(`${config.serverUrl}/${this.resource}/install/${id}`);
+            console.info(res);
+        } catch(error) {
+            console.error(error);
+        }
     }
-    return res?.data;
-};
+    
+    public updateFilesDomain = async (id: string) => {
+        let res: any;
+        try {
+            res = await axios.get(`${config.serverUrl}/${this.resource}/update-files/${id}`);
+            console.info(res);
+        } catch(error) {
+            console.error(error);
+        }
+    }
+    
+    public cleanDomain = async (id: string) => {
+        let res: any;
+        try {
+            res = await axios.get(`${config.serverUrl}/${this.resource}/clean/${id}`);
+            console.info(res);
+        } catch(error) {
+            console.error(error);
+        }
+    }
 
-export const updateResource = async (body: any) => {
-    let res: any;
-    try {
-        res = await axios.put(`${config.serverUrl}/${urlResource}`, {
-            data: body
-        });
-    } catch(error) {
-        console.error(error);
+    public eraseConfigDomain = async (id: string) => {
+        let res: any;
+        try {
+            res = await axios.get(`${config.serverUrl}/${this.resource}/erase-config/${id}`);
+            console.info(res);
+        } catch(error) {
+            console.error(error);
+        }
     }
-    return res?.data;
-};
 
-export const deleteResource = async (id: number) => {
-    let res: any;
-    try {
-        res = await axios.delete(`${config.serverUrl}/${urlResource}/${id}`);
-    } catch(error) {
-        console.error(error);
+    public eraseDomain = async (id: string) => {
+        let res: any;
+        try {
+            res = await axios.get(`${config.serverUrl}/${this.resource}/erase/${id}`);
+            console.info(res);
+        } catch(error) {
+            console.error(error);
+        }
     }
-    return res?.data;
-};
+    
+    public blockDomain = async (id: string) => {
+        let res: any;
+        try {
+            res = await axios.get(`${config.serverUrl}/${this.resource}/block/${id}`);
+            console.info(res);
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
+    public unblockDomain = async (id: string) => {
+        let res: any;
+        try {
+            res = await axios.get(`${config.serverUrl}/${this.resource}/unblock/${id}`);
+            console.info(res);
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
+}
+
+export default DomainsService;

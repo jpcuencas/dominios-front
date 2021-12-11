@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 import DataTable from 'react-data-table-component';
 import console from '../config/logger';
@@ -38,7 +39,7 @@ const columns = useMemo(
         {
             name: 'Name',
             cell: (row: any) =>
-            <a href='servidor.php?mode=edit'>row.name</a>,
+            <Link to="/type/{row.id}">{row.name}</Link>,
             sortable: true,
         },
         {
@@ -55,7 +56,7 @@ const columns = useMemo(
         },
         {
             name:'Options',
-            cell: (row: any) => <button type="button" className="btn btn-primary" onClick={borrar}>Primary</button>,
+            cell: (row: any) => <button type="button" className="btn btn-primary" onClick={borrar}>Borrar</button>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
@@ -85,7 +86,7 @@ const tableDataItems = [
             onSelectedRowsChange={handleChange}
         />
        <div>
-           <p><a href='tipos.php?mode=new'>Crear nuevo tipo</a></p>
+            <p><Link to="/type">Crear nuevo tipo</Link></p>
        </div>  
     </>
     );

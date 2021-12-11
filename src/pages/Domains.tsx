@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 import DataTable from 'react-data-table-component';
 import console from '../config/logger';
+import DomainsService from '../services/DomainsService';
 
 interface Props {
     value:any
 }
+const domainsService = new DomainsService();
 const Domains = (props:any)=> { 
 //    const [isLoading, setLoading] = useState(false);
 
@@ -14,57 +17,58 @@ const Domains = (props:any)=> {
     const [selectedRows, setSelectedRows] = useState([]);
 
     useEffect(() => {
-        
-        console.info('state', selectedRows);
-    }, [selectedRows]);
+        domainsService.loadResources();
+    }, []);
 
 /**
  * <span className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a className="dropdown-item" href="#">Instalar</a>
-                    <a className="dropdown-item" href="#">ActualizarFicheros</a>
-                    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar limpiar del dominio en servidor\"))return false'>LimpiarCarpeta</a>
-                    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar el borrado del dominio en servidor\"))return false'>EliminarConfiguracion</a>
-                    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar el borrado del dominio\"))return false'>Borrar</a>
-                    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar bloquear del dominio en servidor\"))return false'>Bloquear</a>
-                    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar limpiar del dominio en servidor\"))return false'>Desbloquear</a>
-                    <a className="dropdown-item" href="#" target='_blank'>EditarWP</a>
-                    <a className="dropdown-item" href="#" target='_blank'>Visitar</a>
-                  </span>
+    <a className="dropdown-item" href="#">Instalar</a>
+    <a className="dropdown-item" href="#">ActualizarFicheros</a>
+    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar limpiar del dominio en servidor\"))return false'>LimpiarCarpeta</a>
+    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar el borrado del dominio en servidor\"))return false'>EliminarConfiguracion</a>
+    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar el borrado del dominio\"))return false'>Borrar</a>
+    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar bloquear del dominio en servidor\"))return false'>Bloquear</a>
+    <a className="dropdown-item" href="#" onclick='if(!confirm(\"Pulsa Aceptar para confirmar limpiar del dominio en servidor\"))return false'>Desbloquear</a>
+    <a className="dropdown-item" href="#" target='_blank'>EditarWP</a>
+    <a className="dropdown-item" href="#" target='_blank'>Visitar</a>
+  </span>
  */
 
-    const instalar = () => {
+    const instalar = (id: string) => {
         console.info('clicked');
+        domainsService.installDomain(id);
     };
-    const actualizarFicheros = () => {
+    const actualizarFicheros = (id: string) => {
         console.info('clicked');
+        domainsService.updateFilesDomain(id);
     };
-    const limpiarCarpeta = () => {
+    const limpiarCarpeta = (id: string) => {
         if(window.confirm("Pulsa Aceptar para confirmar limpiar del dominio en servidor")) {
-
+            domainsService.cleanDomain(id);
         }
         console.info('clicked');
     };
-    const eliminarConfiguracion = () => {
+    const eliminarConfiguracion = (id: string) => {
         if(window.confirm("Pulsa Aceptar para confirmar el borrado del dominio en servidor")) {
-
+            domainsService.eraseConfigDomain(id);
         }
         console.info('clicked');
     };
-    const borrar = () => {
+    const borrar = (id: string) => {
         if(window.confirm("Pulsa Aceptar para confirmar el borrado del dominio")) {
-
+            domainsService.eraseDomain(id);
         }
         console.info('clicked');
     };
-    const bloquear = () => {
+    const bloquear = (id: string) => {
         if(window.confirm("Pulsa Aceptar para confirmar bloquear del dominio en servidor")) {
-
+            domainsService.blockDomain(id);
         }
         console.info('clicked');
     };
-    const desbloquear = () => {
+    const desbloquear = (id: string) => {
         if(window.confirm("Pulsa Aceptar para confirmar limpiar del dominio en servidor")) {
-
+            domainsService.unblockDomain(id);
         }
         console.info('clicked');
     };
@@ -84,7 +88,7 @@ const Domains = (props:any)=> {
             {
                 name: 'Name',
                 cell: (row: any) =>
-                <a href='servidor.php?mode=edit'>row.name</a>,
+                <Link to="/domain/{row.id}">{row.name}</Link>,
                 sortable: true,
             },
             {
@@ -132,16 +136,17 @@ const Domains = (props:any)=> {
                     </a>
 
                     <span className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a className="dropdown-item" href="#" onClick={instalar}>Instalar</a>
-                      <a className="dropdown-item" href="#" onClick={actualizarFicheros}>ActualizarFicheros</a>
-                      <a className="dropdown-item" href="#" onClick={limpiarCarpeta}>LimpiarCarpeta</a>
-                      <a className="dropdown-item" href="#" onClick={eliminarConfiguracion}>EliminarConfiguracion</a>
-                      <a className="dropdown-item" href="#" onClick={borrar}>Borrar</a>
-                      <a className="dropdown-item" href="#" onClick={bloquear}>Bloquear</a>
-                      { row.state ==='bloqueado' && <a className="dropdown-item" href="#" onClick={desbloquear}>Desbloquear</a>}
+                      <a className="dropdown-item" href="#" onClick={() => instalar(row.id)}>Instalar</a>
+                      <a className="dropdown-item" href="#" onClick={() => actualizarFicheros(row.id)}>ActualizarFicheros</a>
+                      <a className="dropdown-item" href="#" onClick={() => limpiarCarpeta(row.id)}>LimpiarCarpeta</a>
+                      <a className="dropdown-item" href="#" onClick={() => eliminarConfiguracion(row.id)}>EliminarConfiguracion</a>
+                      <a className="dropdown-item" href="#" onClick={() => borrar(row.id)}>Borrar</a>
                       
-                      <a className="dropdown-item" href="{row.name}" target='_blank'>EditarWP</a>
-                      <a className="dropdown-item" href="#" target='_blank'>Visitar</a>
+                      <a className="dropdown-item" href="#" onClick={() => bloquear(row.id)}>Bloquear</a>
+                      { row.state ==='bloqueado' && <a className="dropdown-item" href="#" onClick={() => desbloquear(row.id)}>Desbloquear</a>}
+                      
+                      <a className="dropdown-item" href="{row.name}\admin" target='_blank'>EditarWP</a>
+                      <a className="dropdown-item" href="{row.name}" target='_blank'>Visitar</a>
                     </span>
                   </span>,
                 ignoreRowClick: true,
@@ -217,7 +222,7 @@ const Domains = (props:any)=> {
             onSelectedRowsChange={handleChange}
         />
          <div>
-            <p><a href='dominios.php?mode=new'>Crear nuevo dominio</a></p>
+            <p><Link to="/domain">Crear nuevo dominio</Link></p>
         </div>
     </>
     );
