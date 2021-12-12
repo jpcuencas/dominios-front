@@ -1,7 +1,7 @@
 
 export default interface Server {
     lastChanged?: Date;
-    id: number;
+    id?: number;
     name: string;
     provider?: string;
     ip: string;

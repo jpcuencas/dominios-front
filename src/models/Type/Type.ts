@@ -1,7 +1,7 @@
 
 export default interface Type {
     lastChanged?: Date;
-    id: number;
+    id?: number;
     name: string;
     format: string;
     description?: string;

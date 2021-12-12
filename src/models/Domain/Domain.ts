@@ -5,7 +5,7 @@ import Language from '../Language/Language';
 
 export default interface Domain {
     lastChanged?: Date;
-    id: number;
+    id?: number;
     name: string;
     server: Server;
     type: Type;

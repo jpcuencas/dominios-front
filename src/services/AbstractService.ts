@@ -79,5 +79,15 @@ class AbstractService {
         }
         return res?.data;
     };
+
+    public saveResource = async (body: any) => {
+        let res: any;
+            if(body?.id) {
+                res = this.updateResource(body);
+            } else {
+                res = this.insertResource(body);
+            }
+        return res;
+    };
 }
 export default AbstractService;
