@@ -5,7 +5,9 @@ import config from '../config/dot-env';
 let urlResource ='';
 
 class AbstractService {
-    constructor(){ }
+    constructor(){
+        //build
+     }
 
     protected getUrlResource =  () => {
      return urlResource;

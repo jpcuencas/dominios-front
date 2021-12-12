@@ -6,6 +6,7 @@ interface Props {
 }
 const DomainForm = (props: any) => {
   //    const [isLoading, setLoading] = useState(false);
+  console.log(props?.match?.params?.id);
 
   /**/
 

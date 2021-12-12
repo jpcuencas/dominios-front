@@ -4,12 +4,15 @@
     // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
+        { // execute el comando > npm run dev
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:5000",
-            "webRoot": "${workspaceFolder}/src"
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/src",
+            //"cwd": "${workspaceFolder}",
+            //"runtimeExecutable": "npm",
+            //"runtimeArgs": ["run-script", "dev"],
         }
     ]
 }

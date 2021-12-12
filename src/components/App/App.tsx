@@ -42,19 +42,19 @@ function App() {
 
                             <Route path="/servers" element={<Servers />} />
                             <Route path="/server" element={<ServerForm />} />
-                            <Route path="/server/{id}" element={<ServerForm />} />
+                            <Route path="/server/:id" element={<ServerForm />} />
 
                             <Route path="/domains" element={<Domains />} />
                             <Route path="/domain" element={<DomainForm />} />
-                            <Route path="/domain/{id}" element={<DomainForm />} />
+                            <Route path="/domain/:id" element={<DomainForm />} />
                             
                             <Route path="/templates" element={<Templates />} />
                             <Route path="/template" element={<TemplateForm />} />
-                            <Route path="/template/{id}" element={<TemplateForm />} />
+                            <Route path="/template/:id" element={<TemplateForm />} />
 
                             <Route path="/types" element={<Types />} />
                             <Route path="/type" element={<TypeForm />} />
-                            <Route path="/type/{id}" element={<TypeForm />} />
+                            <Route path="/type/:id" element={<TypeForm />} />
                         </Routes>
                     </div>
                 </BrowserRouter>
