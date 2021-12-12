@@ -1,13 +1,13 @@
-import axios from 'axios';
-import console from '../config/logger';
-import config from '../config/dot-env';
+import AbstractService from "./AbstractService";
 
-export const loadTypes = async (page: string, offset: string) => {
-    let res: any;
-    try {
-        res = await axios.get(`${config.serverUrl}/types?page=${page}&offset=${offset}`);
-    } catch(error) {
-        console.error(error);
+
+class TypesService extends AbstractService {
+
+    public  resource:string ='types';
+    constructor() {
+        super();
+        this.setUrlResource(this.resource);
     }
-    return res?.data;
-};
+}
+
+export default TypesService;

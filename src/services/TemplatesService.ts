@@ -1,13 +1,13 @@
-import axios from 'axios';
-import console from '../config/logger';
-import config from '../config/dot-env';
+import AbstractService from "./AbstractService";
 
-export const loadTemplates = async (page: string, offset: string) => {
-    let res: any;
-    try {
-        res = await axios.get(`${config.serverUrl}/templates?page=${page}&offset=${offset}`);
-    } catch(error) {
-        console.error(error);
+
+class TemplatesService extends AbstractService {
+
+    public  resource:string ='templates';
+    constructor() {
+        super();
+        this.setUrlResource(this.resource);
     }
-    return res?.data;
-};
+}
+
+export default TemplatesService;

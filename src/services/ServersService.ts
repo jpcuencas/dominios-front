@@ -1,13 +1,13 @@
-import axios from 'axios';
-import console from '../config/logger';
-import config from '../config/dot-env';
+import AbstractService from './AbstractService';
 
-export const loadServers = async (page: string, offset: string) => {
-    let res: any;
-    try {
-        res = await axios.get(`${config.serverUrl}/servers?page=${page}&offset=${offset}`);
-    } catch(error) {
-        console.error(error);
+
+class ServersService extends AbstractService {
+
+    public  resource:string ='servers';
+    constructor() {
+        super();
+        this.setUrlResource(this.resource);
     }
-    return res?.data;
-};
+}
+
+export default ServersService;

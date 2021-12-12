@@ -11,7 +11,7 @@ class DomainsService extends AbstractService {
         this.setUrlResource(this.resource);
     }
 
-    public installDomain = async (id: string) => {
+    public installDomain = async (id: number) => {
         let res: any;
         try {
             res = await axios.get(`${config.serverUrl}/${this.resource}/install/${id}`);
@@ -21,7 +21,7 @@ class DomainsService extends AbstractService {
         }
     }
     
-    public updateFilesDomain = async (id: string) => {
+    public updateFilesDomain = async (id: number) => {
         let res: any;
         try {
             res = await axios.get(`${config.serverUrl}/${this.resource}/update-files/${id}`);
@@ -31,7 +31,7 @@ class DomainsService extends AbstractService {
         }
     }
     
-    public cleanDomain = async (id: string) => {
+    public cleanDomain = async (id: number) => {
         let res: any;
         try {
             res = await axios.get(`${config.serverUrl}/${this.resource}/clean/${id}`);
@@ -41,7 +41,7 @@ class DomainsService extends AbstractService {
         }
     }
 
-    public eraseConfigDomain = async (id: string) => {
+    public eraseConfigDomain = async (id: number) => {
         let res: any;
         try {
             res = await axios.get(`${config.serverUrl}/${this.resource}/erase-config/${id}`);
@@ -51,7 +51,7 @@ class DomainsService extends AbstractService {
         }
     }
 
-    public eraseDomain = async (id: string) => {
+    public eraseDomain = async (id: number) => {
         let res: any;
         try {
             res = await axios.get(`${config.serverUrl}/${this.resource}/erase/${id}`);
@@ -61,7 +61,7 @@ class DomainsService extends AbstractService {
         }
     }
     
-    public blockDomain = async (id: string) => {
+    public blockDomain = async (id: number) => {
         let res: any;
         try {
             res = await axios.get(`${config.serverUrl}/${this.resource}/block/${id}`);
@@ -71,7 +71,7 @@ class DomainsService extends AbstractService {
         }
     }
 
-    public unblockDomain = async (id: string) => {
+    public unblockDomain = async (id: number) => {
         let res: any;
         try {
             res = await axios.get(`${config.serverUrl}/${this.resource}/unblock/${id}`);
